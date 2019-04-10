@@ -1,0 +1,27 @@
+asdasd
+<div class="fin-container">
+  <h2>
+    {{name}}
+  </h2>
+
+  <div class="card" *ngFor="let review of reviews">
+    <div class="card-body">
+      <p>
+        <strong>{{review.name}}</strong>
+        <ion-icon class="float-right" [color]="review.rating > 5 ? 'yellow' : ''" name="star"></ion-icon>
+        <ion-icon class="float-right" [color]="review.rating > 4 ? 'yellow' : ''" name="star"></ion-icon>
+        <ion-icon class="float-right" [color]="review.rating > 3 ? 'yellow' : ''" name="star"></ion-icon>
+        <ion-icon class="float-right" [color]="review.rating > 2 ? 'yellow' : ''" name="star"></ion-icon>
+        <ion-icon class="float-right" [color]="review.rating > 1 ? 'yellow' : ''" name="star"></ion-icon>
+      </p>
+      
+      <div class="clearfix"></div>
+      <p>{{review.comments}}</p>
+      <p class="text-muted float-right">
+        {{review.date}}
+      </p>
+    </div>
+  </div>
+
+</div>
+

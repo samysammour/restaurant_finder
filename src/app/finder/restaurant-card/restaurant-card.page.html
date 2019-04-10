@@ -1,0 +1,44 @@
+<ion-card>
+        
+  <ion-card-content>
+    <ion-row>
+      <ion-col size="4">
+        <img [src]="restaurant.photo" class="restaurant-photo" (click)="openPhoto(restaurant.photo)" />
+      </ion-col>
+
+      <ion-col>
+          <ion-card-title>
+            {{restaurant.name}}
+          </ion-card-title>
+      </ion-col>
+    </ion-row>
+    
+    <p>
+      {{restaurant.address}} - {{restaurant.neighborhood}}
+    </p>
+    
+  </ion-card-content>
+
+  <!-- <ion-item>
+    <ion-icon name='type' item-start style="color: #d03e84"></ion-icon>
+    Type: {{rest.cuisineType}}
+  </ion-item> -->
+
+  <ion-item class="top-border">
+    <ion-row>
+      <ion-col size="6">
+        <ion-button class="button-clear" fill="clear" (click)="showReviews()">
+          Reviews &nbsp;&nbsp;
+          <ion-badge item-end>{{restaurant.reviews ? restaurant.reviews.length : 0}}</ion-badge>
+        </ion-button>
+      </ion-col>
+      <ion-col>
+        <ion-button class="float-right" fill="clear" (click)="showAlert()">
+          Opening Hours
+        </ion-button>
+      </ion-col>
+    </ion-row>
+
+  </ion-item>
+
+</ion-card>
