@@ -7,22 +7,27 @@
       </ion-col>
 
       <ion-col>
-          <ion-card-title>
+          <ion-card-title class="card-title">
             {{restaurant.name}}
+            <ion-icon class="float-right" [color]="true" (click)="addToFavourite()" name="star"></ion-icon>
           </ion-card-title>
-      </ion-col>
-    </ion-row>
-    
-    <p>
-      {{restaurant.address}} - {{restaurant.neighborhood}}
-    </p>
+          <ion-icon name='pizza'></ion-icon>
+          <div class="restaurant-type">{{restaurant.cuisineType}}</div>
+        </ion-col>
+      </ion-row>
+      <ion-row>
+        <ion-col>
+          <address>
+            <strong>{{restaurant.neighborhood}}</strong><br />
+            {{restaurant.address.street}}<br />
+            {{restaurant.address.postalCode}}, {{restaurant.address.city}}, {{restaurant.address.country}}
+          </address>
+      
+        </ion-col>
+      </ion-row>
+
     
   </ion-card-content>
-
-  <!-- <ion-item>
-    <ion-icon name='type' item-start style="color: #d03e84"></ion-icon>
-    Type: {{rest.cuisineType}}
-  </ion-item> -->
 
   <ion-item class="top-border">
     <ion-row>

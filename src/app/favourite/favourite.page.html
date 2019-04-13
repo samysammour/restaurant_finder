@@ -1,0 +1,13 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>Favourites</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ng-container *ngIf="favs">
+      <ion-item class="top-border" *ngFor="let fav of favs">
+        {{fav.name}}
+      </ion-item>
+  </ng-container>
+</ion-content>

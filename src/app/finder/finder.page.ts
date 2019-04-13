@@ -1,9 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 
 import { Geolocation, Coordinates } from '@ionic-native/geolocation/ngx';
-import { HttpClient } from '@angular/common/http';
 
 import { Restaurant } from '../models/restaurant.model';
+import { RestaurantService } from '../services/restaurant.service';
 
 @Component({
   selector: 'app-finder',
@@ -15,7 +15,7 @@ export class FinderPage implements OnInit {
   public restaurants: Restaurant[];
   public loading: boolean;
 
-  constructor(private geolocation: Geolocation, private http: HttpClient) {
+  constructor(private geolocation: Geolocation, private servivce: RestaurantService) {
     this.loading = false;
     this.coords = <Coordinates> {
       latitude: 0,
@@ -36,9 +36,9 @@ export class FinderPage implements OnInit {
 
   private async getAllRestaurants() {
     this.loading = true;
-    setTimeout(() => this.http.get('assets/restaurant-data.json').subscribe(async (res: any) => {
-      this.restaurants = <Restaurant[]> res.restaurants;
+    setTimeout(() => this.servivce.getAll().subscribe(async (res: Restaurant[]) => {
+      this.restaurants = res;
       this.loading = false;
-    }), 500);
+    }), 100);
   }
 }

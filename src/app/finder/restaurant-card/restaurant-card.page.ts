@@ -4,6 +4,9 @@ import { PhotoViewer } from '@ionic-native/photo-viewer/ngx';
 
 import { ReviewsComponent } from '../reviews/reviews.component';
 import { Restaurant } from '../../models/restaurant.model';
+import { Router } from '@angular/router';
+import { FavouriteService } from 'src/app/services/favourite.service';
+import { Favourite } from 'src/app/models/favourite.model';
 
 @Component({
   selector: 'app-restaurant-card',
@@ -13,7 +16,8 @@ import { Restaurant } from '../../models/restaurant.model';
 export class RestaurantCardPage implements OnInit {
   @Input() restaurant: Restaurant;
 
-  constructor(private alertController: AlertController, private photoViewer: PhotoViewer, private modalController: ModalController) { }
+  constructor(private alertController: AlertController, private photoViewer: PhotoViewer, private router: Router,
+              private favouriteService: FavouriteService) { }
 
   ngOnInit() {
   }
@@ -40,19 +44,19 @@ export class RestaurantCardPage implements OnInit {
   }
 
   public async showReviews() {
-    const modal = await this.modalController.create({
-      component: ReviewsComponent,
-      componentProps: {
-        'reviews': this.restaurant.reviews,
-        'name': this.restaurant.name
-      }
-    });
-
-    modal.present();
+    this.router.navigateByUrl(`/tabs/finder/reviews/${this.restaurant.id}`);
   }
 
   public openPhoto(image: string) {
-    // this.photoViewer.show(image);
-    this.photoViewer.show('https://mysite.com/path/to/image.jpg', 'My image title', {share: false});
+    this.photoViewer.show(image);
+    // this.photoViewer.show('https://mysite.com/path/to/image.jpg', 'My image title', {share: false});
+  }
+
+  public addToFavourite() {
+    const fav = new Favourite();
+    fav.id = this.restaurant.id;
+    fav.name = this.restaurant.name;
+    fav.address = this.restaurant.address;
+    this.favouriteService.add(fav);
   }
 }

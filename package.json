@@ -32,6 +32,7 @@
     "cordova-plugin-geolocation": "4.0.1",
     "core-js": "^2.5.4",
     "rxjs": "~6.3.3",
+    "uk.co.workingedge.phonegap.plugin.launchnavigator": "5.0.4",
     "zone.js": "~0.8.29"
   },
   "devDependencies": {

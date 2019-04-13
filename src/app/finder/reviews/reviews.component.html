@@ -1,27 +1,38 @@
-asdasd
-<div class="fin-container">
-  <h2>
-    {{name}}
-  </h2>
+<ion-header>
+  <ion-toolbar>
+    <ion-title class="bar bar-header bar-positive">Find a restaurant</ion-title>
+    <!-- <ion-back-button defaultHref="/finder"></ion-back-button> -->
+    <button (click)="returnToFinder()" class="back-button">
+      <ion-icon name="arrow-back" class="arrow-icon"></ion-icon><div>Back</div>
+    </button>
+  </ion-toolbar>
+</ion-header>
+<ion-content>
+    <div class="fin-container">
+      <h2>
+        {{restaurant.name}}
+      </h2>
+      <ng-container *ngIf="restaurant && restaurant.reviews">
 
-  <div class="card" *ngFor="let review of reviews">
-    <div class="card-body">
-      <p>
-        <strong>{{review.name}}</strong>
-        <ion-icon class="float-right" [color]="review.rating > 5 ? 'yellow' : ''" name="star"></ion-icon>
-        <ion-icon class="float-right" [color]="review.rating > 4 ? 'yellow' : ''" name="star"></ion-icon>
-        <ion-icon class="float-right" [color]="review.rating > 3 ? 'yellow' : ''" name="star"></ion-icon>
-        <ion-icon class="float-right" [color]="review.rating > 2 ? 'yellow' : ''" name="star"></ion-icon>
-        <ion-icon class="float-right" [color]="review.rating > 1 ? 'yellow' : ''" name="star"></ion-icon>
-      </p>
-      
-      <div class="clearfix"></div>
-      <p>{{review.comments}}</p>
-      <p class="text-muted float-right">
-        {{review.date}}
-      </p>
+        <div class="card" *ngFor="let review of restaurant.reviews">
+          <div class="card-body">
+            <p>
+              <strong>{{review.name}}</strong>
+              <ion-icon class="float-right" [color]="review.rating > 5 ? 'yellow' : ''" name="star"></ion-icon>
+              <ion-icon class="float-right" [color]="review.rating > 4 ? 'yellow' : ''" name="star"></ion-icon>
+              <ion-icon class="float-right" [color]="review.rating > 3 ? 'yellow' : ''" name="star"></ion-icon>
+              <ion-icon class="float-right" [color]="review.rating > 2 ? 'yellow' : ''" name="star"></ion-icon>
+              <ion-icon class="float-right" [color]="review.rating > 1 ? 'yellow' : ''" name="star"></ion-icon>
+            </p>
+
+            <div class="clearfix"></div>
+            <p>{{review.comments}}</p>
+            <p class="text-muted float-right">
+              {{review.date}}
+            </p>
+          </div>
+        </div>
+      </ng-container>
+
     </div>
-  </div>
-
-</div>
-
+</ion-content>

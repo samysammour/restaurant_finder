@@ -2,12 +2,27 @@
 
 .restaurant-photo {
     width: 100px;
-    height: 100px;
+    height: auto;
+}
+
+.card-title { 
+    font-size: 16px;
 }
 
 .item-native {
     padding: 0 !important;
 }
+
+address {
+    font-size: 13px;
+}
+
+.restaurant-type {
+    font-size: 13px;
+    margin-top: -22px;
+    margin-left: 20px;
+}
+
 ion-item {
     .item-native {
         padding-left: 0;

@@ -50,3 +50,29 @@ ion-toolbar {
     --background: rgb(56, 128, 255);
     color: #fff;
 }
+
+.back-button  {
+    background: transparent;
+    border: none;
+    outline: none;
+    color: #fff;
+    margin-top: 5px;
+    div {
+        margin-top: -25px;
+        margin-left: 30px;
+    }
+}
+
+.arrow-icon {
+    font-size: 30px;
+    margin-left: -30px;
+}
+
+.ion-color-yellow {
+	--ion-color-base: gold;
+	--ion-color-base-rgb: 255, 255, 0;
+	--ion-color-contrast: gold;
+	--ion-color-contrast-rgb: 0, 0, 0;
+	--ion-color-shade: gold;
+	--ion-color-tint: gold;
+}
