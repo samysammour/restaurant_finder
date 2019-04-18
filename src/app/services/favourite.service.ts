@@ -2,28 +2,35 @@ import { Injectable } from '@angular/core';
 import { Observable, of } from 'rxjs';
 
 import { Favourite } from '../models/favourite.model';
+import { BaseService } from './base.service';
+import { HttpClient } from '@angular/common/http';
+import { map } from 'rxjs/operators';
 
 @Injectable({
     providedIn: 'root'
 })
-export class FavouriteService {
-    private favourites: Favourite[];
+export class FavouriteService extends BaseService {
 
-    constructor() {
-        this.favourites = new Array<Favourite>();
+    constructor(private http: HttpClient) {
+        super();
     }
 
     public getAll(): Observable<Favourite[]> {
-        return of(this.favourites);
+        return this.http.get(`${this.baseUrl}/api/Favourite?clientId=${this.clientId}`).pipe(
+            map((res: Favourite[]) => res)
+        );
     }
 
-    public add(favourite: Favourite): Observable<Favourite[]> {
-        this.favourites.push(favourite);
-        return this.getAll();
+    public add(favourite: Favourite): Observable<Favourite> {
+        favourite.clientId = this.clientId;
+        return this.http.post(`${this.baseUrl}/api/Favourite`, favourite, { headers: this.headers }).pipe(
+            map((res: Favourite) => res)
+        );
     }
 
     public delete(id: number): Observable<Favourite[]> {
-        this.favourites = this.favourites.filter(x => x.id !== id);
-        return this.getAll();
+        return this.http.delete(`${this.baseUrl}/api/Favourite?id=${id}&clientId=${this.clientId}`).pipe(
+            map((res: Favourite[]) => res)
+        );
     }
 }

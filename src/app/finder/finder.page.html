@@ -9,7 +9,7 @@
   <app-finding-restaurant *ngIf="loading"></app-finding-restaurant>
   <ng-container *ngIf="!loading && restaurants && restaurants.length > 0">
     <ng-container *ngFor="let restaurant of restaurants">
-      <app-restaurant-card [restaurant]="restaurant"></app-restaurant-card>
+      <app-restaurant-card [favs]="favs" [restaurant]="restaurant" (favClick)="getFavourites()"></app-restaurant-card>
     </ng-container>
   </ng-container>
 

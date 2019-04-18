@@ -1,15 +1,23 @@
-import { RestaurantCoords } from './restaurat-coords.model';
 import { Review } from './restaurant-review.model';
-import { Address } from './address.model';
 
 export class Restaurant {
     public id: number;
     public name: string;
     public neighborhood: string;
     public photo: string;
-    public address: Address;
-    public latlng: RestaurantCoords;
     public cuisineType: string;
-    public openingHours: {[key: string]: string };
+    public monday: string;
+    public tuesday: string;
+    public wednesday: string;
+    public thursday: string;
+    public friday: string;
+    public saturday: string;
+    public sunday: string;
     public reviews: Review[];
+    public street: string;
+    public postalCode: string;
+    public city: string;
+    public country: string;
+    public lat: number;
+    public lng: number;
 }

@@ -36,11 +36,11 @@ export class ReviewsComponent implements OnInit {
       message: 'Please wait...',
       spinner: 'crescent'
     });
-    if (!this.restaurant.id || this.restaurant.id === '' ) {
+    if (!this.restaurant.id || this.restaurant.id === 0 ) {
       await loadingElement.present();
     }
 
-    setInterval(() => this.service.getById(id).subscribe(async (res: Restaurant) => {
+    setTimeout(() => this.service.getById(id).subscribe(async (res: Restaurant) => {
       this.restaurant = res;
       await loadingElement.dismiss();
     }), 100);

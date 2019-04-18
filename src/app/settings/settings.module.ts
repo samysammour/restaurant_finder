@@ -5,12 +5,13 @@ import { Routes, RouterModule } from '@angular/router';
 
 import { IonicModule } from '@ionic/angular';
 
-import { FavouritePage } from './favourite.page';
-import { PreviewRestuarantPage } from './preview-restuarant/preview-restuarant.page';
+import { SettingsPage } from './settings.page';
 
 const routes: Routes = [
-  { path: '', component: FavouritePage },
-  { path: 'preview/:id', component: PreviewRestuarantPage},
+  {
+    path: '',
+    component: SettingsPage
+  }
 ];
 
 @NgModule({
@@ -20,9 +21,6 @@ const routes: Routes = [
     IonicModule,
     RouterModule.forChild(routes)
   ],
-  declarations: [FavouritePage, PreviewRestuarantPage],
-  entryComponents: [
-    PreviewRestuarantPage
-  ],
+  declarations: [SettingsPage]
 })
-export class FavouritePageModule {}
+export class SettingsPageModule {}

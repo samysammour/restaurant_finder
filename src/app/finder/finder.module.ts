@@ -6,7 +6,6 @@ import { Routes, RouterModule } from '@angular/router';
 import { IonicModule } from '@ionic/angular';
 
 import { FinderPage } from './finder.page';
-import { Geolocation } from '@ionic-native/geolocation/ngx';
 import { RestaurantCardPage } from './restaurant-card/restaurant-card.page';
 import { FindingRestaurantComponent } from './finding-restaurant/finding-restaurant.component';
 import { ReviewsComponent } from './reviews/reviews.component';
@@ -25,7 +24,6 @@ const routes: Routes = [
   ],
   declarations: [FinderPage, RestaurantCardPage, FindingRestaurantComponent, ReviewsComponent],
   providers: [
-    Geolocation
   ],
   entryComponents: [
     ReviewsComponent

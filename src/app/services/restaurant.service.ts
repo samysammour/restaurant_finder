@@ -3,23 +3,35 @@ import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { Restaurant } from '../models/restaurant.model';
+import { BaseService } from './base.service';
+import { Geolocation, Coordinates } from '@ionic-native/geolocation/ngx';
 
 @Injectable({
     providedIn: 'root'
 })
-export class RestaurantService {
-
-    constructor(private http: HttpClient) { }
+export class RestaurantService extends BaseService {
+    public coords = <Coordinates> {
+        latitude: 0,
+        longitude: 0
+    };
+    constructor(private http: HttpClient, private geolocation: Geolocation) {
+        super();
+        geolocation.getCurrentPosition().then((resp) => {
+            this.coords = resp.coords;
+        }).catch((error) => {
+            console.log('Error getting location', error);
+        });
+    }
 
     public getAll(): Observable<Restaurant[]> {
-        return this.http.get('assets/restaurant-data.json').pipe(
-            map((res: any) => <Restaurant[]> res.restaurants)
+        return this.http.get(`${this.baseUrl}/api/Restaurant?lat=${this.coords.latitude}&lng=${this.coords.longitude}`).pipe(
+            map((res: Restaurant[]) => res)
         );
     }
 
     public getById(id: string): Observable<Restaurant> {
-        return this.http.get('assets/restaurant-data.json').pipe(
-            map((res: any) => <Restaurant> res.restaurants.find((x: { id: number; }) => x.id === parseInt(id, 10)))
+        return this.http.get(`${this.baseUrl}/api/Restaurant/${id}`).pipe(
+            map((res: Restaurant) => res)
         );
     }
 }

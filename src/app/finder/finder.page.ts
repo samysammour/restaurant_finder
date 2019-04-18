@@ -1,9 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 
-import { Geolocation, Coordinates } from '@ionic-native/geolocation/ngx';
-
 import { Restaurant } from '../models/restaurant.model';
 import { RestaurantService } from '../services/restaurant.service';
+import { FavouriteService } from '../services/favourite.service';
+import { Favourite } from '../models/favourite.model';
 
 @Component({
   selector: 'app-finder',
@@ -11,34 +11,36 @@ import { RestaurantService } from '../services/restaurant.service';
   styleUrls: ['./finder.page.scss'],
 })
 export class FinderPage implements OnInit {
-  public coords: Coordinates;
   public restaurants: Restaurant[];
+  public favs: Favourite[];
   public loading: boolean;
 
-  constructor(private geolocation: Geolocation, private servivce: RestaurantService) {
+  constructor(private servivce: RestaurantService, private favService: FavouriteService) {
     this.loading = false;
-    this.coords = <Coordinates> {
-      latitude: 0,
-      longitude: 0
-    };
     this.restaurants = new Array<Restaurant>();
+    this.favs = new Array<Favourite>();
   }
 
   ngOnInit() {
-    this.geolocation.getCurrentPosition().then((resp) => {
-      this.coords = resp.coords;
-     }).catch((error) => {
-       console.log('Error getting location', error);
-     });
-
      this.getAllRestaurants();
+     this.getFavourites();
   }
 
-  private async getAllRestaurants() {
+  ionViewWillEnter() {
+    this.getFavourites();
+  }
+
+  private getAllRestaurants() {
     this.loading = true;
-    setTimeout(() => this.servivce.getAll().subscribe(async (res: Restaurant[]) => {
+    this.servivce.getAll().subscribe((res: Restaurant[]) => {
       this.restaurants = res;
       this.loading = false;
-    }), 100);
+    });
+  }
+
+  public getFavourites() {
+    this.favService.getAll().subscribe((fav: Favourite[]) => {
+      this.favs = fav;
+    });
   }
 }

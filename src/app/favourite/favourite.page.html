@@ -5,9 +5,23 @@
 </ion-header>
 
 <ion-content>
-  <ng-container *ngIf="favs">
-      <ion-item class="top-border" *ngFor="let fav of favs">
-        {{fav.name}}
-      </ion-item>
-  </ng-container>
+  <div class="fin-container">
+    <ng-container *ngIf="favs && favs.length > 0; else empty">
+      <ul class="list-group list-group-flush">
+        <ng-container *ngFor="let fav of favs">
+          <li class="list-group-item"(click)="showRestaurant(fav.id)">
+            {{fav.name}}
+            <button type="button" class="close float-right" aria-label="Close" (click)="deleteFromFavourite(fav.id)">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </li>
+        </ng-container>
+      </ul>
+    </ng-container>
+    <ng-template #empty>
+      <h4>
+        You didn't add any restaurants to favourites
+      </h4>
+    </ng-template>
+  </div>
 </ion-content>

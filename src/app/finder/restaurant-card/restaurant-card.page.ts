@@ -1,4 +1,4 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { AlertController, ModalController } from '@ionic/angular';
 import { PhotoViewer } from '@ionic-native/photo-viewer/ngx';
 
@@ -15,6 +15,9 @@ import { Favourite } from 'src/app/models/favourite.model';
 })
 export class RestaurantCardPage implements OnInit {
   @Input() restaurant: Restaurant;
+  @Input() favs: Favourite[];
+
+  @Output() favClick: EventEmitter<any> = new EventEmitter<any>();
 
   constructor(private alertController: AlertController, private photoViewer: PhotoViewer, private router: Router,
               private favouriteService: FavouriteService) { }
@@ -23,24 +26,22 @@ export class RestaurantCardPage implements OnInit {
   }
 
   public async showAlert() {
-    if (this.restaurant.openingHours) {
-      let text = '';
-      text += 'Monday: ' + this.restaurant.openingHours.monday + '<br />';
-      text += 'Tuesday: ' + this.restaurant.openingHours.tuesday + '<br />';
-      text += 'Wednesday: ' + this.restaurant.openingHours.wednesday + '<br />';
-      text += 'Thursday: ' + this.restaurant.openingHours.thursday + '<br />';
-      text += 'Friday: ' + this.restaurant.openingHours.friday + '<br />';
-      text += 'Saturday: ' + this.restaurant.openingHours.saturday + '<br />';
-      text += 'Sunday: ' + this.restaurant.openingHours.sunday + '<br />';
+    let text = '';
+    text += 'Monday: ' + this.restaurant.monday + '<br />';
+    text += 'Tuesday: ' + this.restaurant.tuesday + '<br />';
+    text += 'Wednesday: ' + this.restaurant.wednesday + '<br />';
+    text += 'Thursday: ' + this.restaurant.thursday + '<br />';
+    text += 'Friday: ' + this.restaurant.friday + '<br />';
+    text += 'Saturday: ' + this.restaurant.saturday + '<br />';
+    text += 'Sunday: ' + this.restaurant.sunday + '<br />';
 
-      const alert = await this.alertController.create({
-        header: 'Opening Hours',
-        message: text,
-        buttons: ['OK'],
-      });
+    const alert = await this.alertController.create({
+      header: 'Opening Hours',
+      message: text,
+      buttons: ['OK'],
+    });
 
-      await alert.present();
-    }
+    await alert.present();
   }
 
   public async showReviews() {
@@ -56,7 +57,15 @@ export class RestaurantCardPage implements OnInit {
     const fav = new Favourite();
     fav.id = this.restaurant.id;
     fav.name = this.restaurant.name;
-    fav.address = this.restaurant.address;
-    this.favouriteService.add(fav);
+    if (this.isFav()) {
+      this.favouriteService.delete(fav.id).subscribe();
+    } else {
+      this.favouriteService.add(fav).subscribe();
+    }
+    this.favClick.emit();
+  }
+
+  public isFav(): boolean {
+    return this.favs.find(x => x.restaurantId === this.restaurant.id) != null;
   }
 }

@@ -41,3 +41,7 @@ ion-item {
     --inner-border-width: 0;
     border-top: 1px solid rgba(162, 164, 171, .2);
 }
+
+ion-icon[name="star"] {
+    font-size: 18px;
+}
