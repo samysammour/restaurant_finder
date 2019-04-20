@@ -23,18 +23,28 @@ export class FavouritePage implements OnInit {
     this.getFavourites();
   }
 
+  /**
+   * Navigate to a restaurant preview page
+   * @param id The id of the restaurant
+   */
   public showRestaurant(id: number) {
     this.router.navigateByUrl(`/tabs/favourite/preview/${id}`);
   }
 
-  public deleteFromFavourite(id: number) {
-    this.favService.delete(id).subscribe((favs: Favourite[]) => {
+  /**
+   * Delete restaurant from favourite list
+   * @param id The id of the restaurant
+   */
+  public deleteFromFavourite(restaurantId: number) {
+    this.favService.delete(restaurantId).subscribe((favs: Favourite[]) => {
       this.favs = favs;
     });
   }
 
+  /**
+   * Get all restaurants
+   */
   private getFavourites() {
     this.favService.getAll().subscribe(x => this.favs = x);
   }
-
 }

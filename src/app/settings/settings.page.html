@@ -7,20 +7,26 @@
 <ion-content>
   <br />
   <br />
-  <div class="fin-container" *ngIf="settings && settings.length > 0"> 
+  <div class="fin-container" *ngIf="settings && settings.length > 0">
     <form action="/action_page.php">
       <div class="form-group">
-        <label for="distance">Distance *</label>
-        <input type="text" class="form-control" id="distance" placeholder="distance" name="distance" [(ngModel)]="settings[0].value">
+        <ion-item>
+          <ion-label position="floating">Max Distance</ion-label>
+          <ion-input id="distance" placeholder="distance" name="distance" [(ngModel)]="settings[0].value"></ion-input>
+        </ion-item>  
       </div>
       <div class="form-group">
-          <label for="distance">Sort Type *</label>
-        <select name="sortType" class="form-control" [(ngModel)]="settings[1].value">
-          <option value="1">Top rated</option>
-          <option value="2">Nearest</option>
-        </select>
+        <ion-list>
+          <ion-item>
+            <ion-label position="floating">Sort Type *</ion-label>
+            <ion-select name="sortType" placeholder="Select One" [(ngModel)]="settings[1].value">
+              <ion-select-option value="1">Top rated</ion-select-option>
+              <ion-select-option value="2">Nearest</ion-select-option>
+            </ion-select>
+          </ion-item>
+        </ion-list>
       </div>
-      <button (click)="save()" class="btn btn-primary btn-block">Save</button>
+      <ion-button (click)="save()" color="primary" expand="block">Save</ion-button>
     </form>
   </div>
 </ion-content>

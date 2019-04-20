@@ -9,9 +9,9 @@
     <ng-container *ngIf="favs && favs.length > 0; else empty">
       <ul class="list-group list-group-flush">
         <ng-container *ngFor="let fav of favs">
-          <li class="list-group-item"(click)="showRestaurant(fav.id)">
-            {{fav.name}}
-            <button type="button" class="close float-right" aria-label="Close" (click)="deleteFromFavourite(fav.id)">
+          <li class="list-group-item">
+            <span (click)="showRestaurant(fav.id)">{{fav.name}}</span>
+            <button type="button" class="close float-right" aria-label="Close" (click)="deleteFromFavourite(fav.restaurantId)">
               <span aria-hidden="true">&times;</span>
             </button>
           </li>

@@ -26,14 +26,24 @@ export class PreviewRestuarantPage implements OnInit {
     });
   }
 
+  /**
+   * Navigate back to favourite list
+   */
   public returnToFav() {
     this.router.navigate(['/tabs', 'favourite']);
   }
 
+  /**
+   * View the restaurant image
+   * @param image The restaurant image
+   */
   public openPhoto(image: string) {
     this.photoViewer.show(image);
   }
 
+  /**
+   * View the Opening hours alert
+   */
   public async showAlert() {
     let text = '';
     text += 'Monday: ' + this.restaurant.monday + '<br />';
@@ -53,6 +63,10 @@ export class PreviewRestuarantPage implements OnInit {
     await alert.present();
   }
 
+  /**
+   * Get the restaurant by Id
+   * @param id The restaurant id
+   */
   private async getRestuarant(id: string) {
     const loadingElement = await this.loadingController.create({
       message: 'Please wait...',
@@ -62,10 +76,9 @@ export class PreviewRestuarantPage implements OnInit {
       await loadingElement.present();
     }
 
-    setTimeout(() => this.service.getById(id).subscribe(async (res: Restaurant) => {
+    this.service.getById(id).subscribe(async (res: Restaurant) => {
       this.restaurant = res;
       await loadingElement.dismiss();
-    }), 100);
+    });
   }
-
 }

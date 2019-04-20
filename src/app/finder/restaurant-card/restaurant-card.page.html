@@ -8,13 +8,14 @@
 
       <ion-col>
           <ion-card-title class="card-title">
+            <ion-icon class="float-right" [color]="isFav() ? 'yellow' : ''" (click)="toggleToFavourite()" name="bookmark"></ion-icon>
             {{restaurant.name}}
-            <ion-icon class="float-right" [color]="isFav() ? 'yellow' : ''" (click)="addToFavourite()" name="star"></ion-icon>
-            <!-- <ion-icon class="float-right" [color]="review.rating > 5 ? 'yellow' : ''" name="star"></ion-icon>
-            <ion-icon class="float-right" [color]="review.rating > 4 ? 'yellow' : ''" name="star"></ion-icon>
-            <ion-icon class="float-right" [color]="review.rating > 3 ? 'yellow' : ''" name="star"></ion-icon>
-            <ion-icon class="float-right" [color]="review.rating > 2 ? 'yellow' : ''" name="star"></ion-icon>
-            <ion-icon class="float-right" [color]="review.rating > 1 ? 'yellow' : ''" name="star"></ion-icon> -->
+            <br />
+            <ion-icon [color]="rating >= 1 ? 'yellow' : ''" name="star"></ion-icon>
+            <ion-icon [color]="rating >= 2 ? 'yellow' : ''" name="star"></ion-icon>
+            <ion-icon [color]="rating >= 3 ? 'yellow' : ''" name="star"></ion-icon>
+            <ion-icon [color]="rating >= 4 ? 'yellow' : ''" name="star"></ion-icon>
+            <ion-icon [color]="rating >= 5 ? 'yellow' : ''" name="star"></ion-icon>
 
           </ion-card-title>
           <ion-icon name='pizza'></ion-icon>

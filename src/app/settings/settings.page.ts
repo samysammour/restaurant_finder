@@ -18,6 +18,9 @@ export class SettingsPage implements OnInit {
     this.getSettings();
   }
 
+  /**
+   * Save the settings
+   */
   public async save() {
     this.service.update(this.settings).subscribe(async (res: Setting[]) => {
       this.settings = res;
@@ -27,15 +30,16 @@ export class SettingsPage implements OnInit {
         message: 'Done..',
         buttons: ['OK'],
       });
-  
       await alert.present();
     });
   }
 
+  /**
+   * Get all settings from server
+   */
   private getSettings() {
     this.service.getAll().subscribe((res: Setting[]) => {
       this.settings = res;
     });
   }
-
 }

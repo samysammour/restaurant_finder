@@ -20,4 +20,6 @@ export class Restaurant {
     public country: string;
     public lat: number;
     public lng: number;
+    public distance: number;
+    public rating: number;
 }

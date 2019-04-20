@@ -27,10 +27,17 @@ export class ReviewsComponent implements OnInit {
     });
   }
 
+  /**
+   * Navigate back to restaurants finder page
+   */
   public returnToFinder() {
     this.router.navigate(['/tabs', 'finder']);
   }
 
+  /**
+   * Get a restaurant by Id
+   * @param id The Restaurant Id
+   */
   private async getRestuarant(id: string) {
     const loadingElement = await this.loadingController.create({
       message: 'Please wait...',
@@ -40,9 +47,9 @@ export class ReviewsComponent implements OnInit {
       await loadingElement.present();
     }
 
-    setTimeout(() => this.service.getById(id).subscribe(async (res: Restaurant) => {
+    this.service.getById(id).subscribe(async (res: Restaurant) => {
       this.restaurant = res;
       await loadingElement.dismiss();
-    }), 100);
+    });
   }
 }

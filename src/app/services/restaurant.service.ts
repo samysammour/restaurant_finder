@@ -23,12 +23,21 @@ export class RestaurantService extends BaseService {
         });
     }
 
+    /**
+     * Get all restaurants
+     * @returns Observable of restaurants
+     */
     public getAll(): Observable<Restaurant[]> {
         return this.http.get(`${this.baseUrl}/api/Restaurant?lat=${this.coords.latitude}&lng=${this.coords.longitude}`).pipe(
             map((res: Restaurant[]) => res)
         );
     }
 
+    /**
+     * Get a restaurant by id
+     * @param id the restaurant id
+     * @returns Observable of a restaurant
+     */
     public getById(id: string): Observable<Restaurant> {
         return this.http.get(`${this.baseUrl}/api/Restaurant/${id}`).pipe(
             map((res: Restaurant) => res)
