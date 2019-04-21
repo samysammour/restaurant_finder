@@ -7,6 +7,7 @@ import { Restaurant } from '../../models/restaurant.model';
 import { Router } from '@angular/router';
 import { FavouriteService } from 'src/app/services/favourite.service';
 import { Favourite } from 'src/app/models/favourite.model';
+import { LaunchNavigator, LaunchNavigatorOptions } from '@ionic-native/launch-navigator/ngx';
 
 @Component({
   selector: 'app-restaurant-card',
@@ -23,7 +24,7 @@ export class RestaurantCardPage implements OnInit {
   @Output() favClick: EventEmitter<any> = new EventEmitter<any>();
 
   constructor(private alertController: AlertController, private photoViewer: PhotoViewer, private router: Router,
-              private favouriteService: FavouriteService, private ref: ChangeDetectorRef) {
+              private favouriteService: FavouriteService, private ref: ChangeDetectorRef, private launchNavigator: LaunchNavigator) {
                 this.rating = 0;
               }
 
@@ -66,6 +67,20 @@ export class RestaurantCardPage implements OnInit {
    */
   public openPhoto(image: string) {
     this.photoViewer.show(image);
+  }
+
+  public openMap() {
+    const address = `${this.restaurant.street}, ${this.restaurant.postalCode} ${this.restaurant.city}`;
+    const options: LaunchNavigatorOptions = {
+      start: address
+      // app: LaunchNavigator.APPS.UBER
+    };
+
+    this.launchNavigator.navigate(address, options)
+      .then(
+        success => console.log('Launched navigator'),
+        error => console.log('Error launching navigator', error)
+      );
   }
 
   /**

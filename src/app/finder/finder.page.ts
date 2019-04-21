@@ -62,14 +62,10 @@ export class FinderPage implements OnInit {
    * Get all settings and the restaurants when finished
    */
   public getSettings() {
-    if (this.settings && this.settings.length === 2) {
+    this.settingsService.getAll().subscribe((settings: Setting[]) => {
+      this.settings = settings;
       this.getAllRestaurants();
-    } else {
-      this.settingsService.getAll().subscribe((settings: Setting[]) => {
-        this.settings = settings;
-        this.getAllRestaurants();
-      });
-    }
+    });
   }
 
   /**
@@ -78,7 +74,7 @@ export class FinderPage implements OnInit {
   private sortRestaurant() {
     if (this.restaurants && this.restaurants.length > 0 && this.settings && this.settings.length > 0) {
       if (this.settings[1].value === '1') {
-        this.restaurants.sort(function(a, b) { return a.rating - b.rating; });
+        this.restaurants.sort(function(a, b) { return b.rating - a.rating; });
       } else if (this.settings[1].value === '2') {
         this.restaurants.sort(function(a, b) { return a.distance - b.distance; });
       }

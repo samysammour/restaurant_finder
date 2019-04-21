@@ -26,8 +26,10 @@
         <ion-col>
           <address>
             <strong>{{restaurant.neighborhood}}</strong><br />
-            {{restaurant.street}}<br />
-            {{restaurant.postalCode}}, {{restaurant.city}}, {{restaurant.country}}
+            <span (click)="openMap()">
+              {{restaurant.street}}<br />
+              {{restaurant.postalCode}}, {{restaurant.city}}, {{restaurant.country}}
+            </span>
           </address>
       
         </ion-col>

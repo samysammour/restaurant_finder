@@ -12,6 +12,7 @@ import { AppComponent } from './app.component';
 import { FormsModule } from '@angular/forms';
 import { PhotoViewer } from '@ionic-native/photo-viewer/ngx';
 import { HttpClientModule } from '@angular/common/http';
+import { LaunchNavigator } from '@ionic-native/launch-navigator/ngx';
 
 @NgModule({
   declarations: [AppComponent],
@@ -27,6 +28,7 @@ import { HttpClientModule } from '@angular/common/http';
     StatusBar,
     Geolocation,
     SplashScreen,
+    LaunchNavigator,
     PhotoViewer,
     { provide: RouteReuseStrategy, useClass: IonicRouteStrategy }
   ],

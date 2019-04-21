@@ -17,11 +17,11 @@
           <div class="card-body">
             <p>
               <strong>{{review.name}}</strong>
-              <ion-icon class="float-right" [color]="review.rating > 5 ? 'yellow' : ''" name="star"></ion-icon>
-              <ion-icon class="float-right" [color]="review.rating > 4 ? 'yellow' : ''" name="star"></ion-icon>
-              <ion-icon class="float-right" [color]="review.rating > 3 ? 'yellow' : ''" name="star"></ion-icon>
-              <ion-icon class="float-right" [color]="review.rating > 2 ? 'yellow' : ''" name="star"></ion-icon>
-              <ion-icon class="float-right" [color]="review.rating > 1 ? 'yellow' : ''" name="star"></ion-icon>
+              <ion-icon class="float-right" [color]="review.rating >= 5 ? 'yellow' : ''" name="star"></ion-icon>
+              <ion-icon class="float-right" [color]="review.rating >= 4 ? 'yellow' : ''" name="star"></ion-icon>
+              <ion-icon class="float-right" [color]="review.rating >= 3 ? 'yellow' : ''" name="star"></ion-icon>
+              <ion-icon class="float-right" [color]="review.rating >= 2 ? 'yellow' : ''" name="star"></ion-icon>
+              <ion-icon class="float-right" [color]="review.rating >= 1 ? 'yellow' : ''" name="star"></ion-icon>
             </p>
 
             <div class="clearfix"></div>

@@ -16,11 +16,6 @@ export class RestaurantService extends BaseService {
     };
     constructor(private http: HttpClient, private geolocation: Geolocation) {
         super();
-        geolocation.getCurrentPosition().then((resp) => {
-            this.coords = resp.coords;
-        }).catch((error) => {
-            console.log('Error getting location', error);
-        });
     }
 
     /**
@@ -42,5 +37,13 @@ export class RestaurantService extends BaseService {
         return this.http.get(`${this.baseUrl}/api/Restaurant/${id}`).pipe(
             map((res: Restaurant) => res)
         );
+    }
+
+    public calculateCoords() {
+        this.geolocation.getCurrentPosition().then((resp) => {
+            this.coords = resp.coords;
+        }).catch((error) => {
+            console.log('Error getting location', error);
+        });
     }
 }
