@@ -1,5 +1,5 @@
 import { Component, OnInit, Input, Output, EventEmitter, ChangeDetectorRef, ChangeDetectionStrategy } from '@angular/core';
-import { AlertController, ModalController } from '@ionic/angular';
+import { AlertController, ModalController, Platform } from '@ionic/angular';
 import { PhotoViewer } from '@ionic-native/photo-viewer/ngx';
 
 import { ReviewsComponent } from '../reviews/reviews.component';
@@ -24,7 +24,8 @@ export class RestaurantCardPage implements OnInit {
   @Output() favClick: EventEmitter<any> = new EventEmitter<any>();
 
   constructor(private alertController: AlertController, private photoViewer: PhotoViewer, private router: Router,
-              private favouriteService: FavouriteService, private ref: ChangeDetectorRef, private launchNavigator: LaunchNavigator) {
+              private favouriteService: FavouriteService, private ref: ChangeDetectorRef, private launchNavigator: LaunchNavigator,
+              private platform: Platform) {
                 this.rating = 0;
               }
 
@@ -66,7 +67,9 @@ export class RestaurantCardPage implements OnInit {
    * @param image The restaurant image
    */
   public openPhoto(image: string) {
-    this.photoViewer.show(image);
+    this.platform.ready().then(() => {
+        this.photoViewer.show(image);
+      });
   }
 
   public openMap() {
